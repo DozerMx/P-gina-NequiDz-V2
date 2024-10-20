@@ -150,6 +150,43 @@
             border-radius: 10px;
         }
 
+        /* Estilos actualizados para los contadores */
+        .counters-section {
+            background-color: rgba(0, 0, 0, 0.85);
+            border: 2px solid #FFD700;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        .counters {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .counter {
+            text-align: center;
+            background: linear-gradient(145deg, #FFD700, #FFA500);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .counter:hover {
+            transform: scale(1.05);
+        }
+        .counter-title {
+            font-size: 1.5rem;
+            color: #000;
+            margin-bottom: 10px;
+        }
+        .counter-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #000;
+        }
+
         /* Pie de página */
         .footer {
             text-align: center;
@@ -210,7 +247,7 @@
                 <h2>Descargar Dz Oficial</h2>
                 <p>Para descargar la APK de Dz Oficial, haz clic en el botón de abajo:</p>
                 <div class="download-section">
-                    <a href="NequiDz V2_1.0.0.apk" class="download-button" download>Descargar APK</a>
+                    <a href="NequiDz V2_1.0.0.apk" class="download-button" id="downloadButton" download>Descargar APK</a>
                     <img src="https://i.ibb.co/rFPC6YX/1729248756168.jpg" alt="Imagen de Dz Oficial">
                 </div>
             </section>
@@ -224,11 +261,53 @@
                 </video>
             </section>
 
+            <!-- Nueva sección para los contadores -->
+            <section class="counters-section">
+                <h2 style="color: #FFD700; text-align: center; margin-bottom: 20px;">Estadísticas</h2>
+                <div class="counters">
+                    <div class="counter">
+                        <div class="counter-title">Visitas</div>
+                        <div class="counter-value" id="visitCount">0</div>
+                    </div>
+                    <div class="counter">
+                        <div class="counter-title">Descargas</div>
+                        <div class="counter-value" id="downloadCount">0</div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Pie de página -->
             <div class="footer">
                 <p>Copyright © 2024 Dz Oficial. Todos los derechos reservados.</p>
             </div>
         </div>
     </div>
+
+    <script>
+        // Función para incrementar y mostrar el contador de visitas
+        function incrementVisitCount() {
+            let visits = localStorage.getItem('visitCount') || 0;
+            visits = parseInt(visits) + 1;
+            localStorage.setItem('visitCount', visits);
+            document.getElementById('visitCount').textContent = visits;
+        }
+
+        // Función para incrementar y mostrar el contador de descargas
+        function incrementDownloadCount() {
+            let downloads = localStorage.getItem('downloadCount') || 0;
+            downloads = parseInt(downloads) + 1;
+            localStorage.setItem('downloadCount', downloads);
+            document.getElementById('downloadCount').textContent = downloads;
+        }
+
+        // Incrementar el contador de visitas al cargar la página
+        incrementVisitCount();
+
+        // Mostrar el contador de descargas inicial
+        document.getElementById('downloadCount').textContent = localStorage.getItem('downloadCount') || 0;
+
+        // Agregar evento de clic al botón de descarga
+        document.getElementById('downloadButton').addEventListener('click', incrementDownloadCount);
+    </script>
 </body>
 </html>
